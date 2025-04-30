@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://5qy2dcg84pjv"]
+
+[ext_resource type="PackedScene" uid="uid://c26rohxvxhkpi" path="res://Player.tscn" id="1_vt467"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lema7"]
+size = Vector2(163, 11)
+
+[node name="Structures" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(93, 82)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(71.5, -4.5)
+shape = SubResource("RectangleShape2D_lema7")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
+offset_left = -82.0
+offset_top = -5.0
+offset_right = 82.0
+offset_bottom = 5.0
+color = Color(0.0588235, 1, 1, 1)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_vt467")]
+position = Vector2(92, 61)
