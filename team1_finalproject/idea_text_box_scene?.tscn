@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bkcjpfuh2otpy"]
+
+[node name="idea text box scene?" type="Node2D"]
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_right = 810.0
+offset_bottom = 333.0
+text = "portal mechanics are a big part of gameplay
+- the game environment could take on a more futuristic appearance in accordance with that
+- some kind of laboratory? 
+- abandoned laboratory, overgrown consoles 
+
+Story
+- two people are willingly or unwillingly trapped in an abandoned lab to test new portal technology
+they must work together to test the experimental device or die trying 
+
+- alternate story route"
