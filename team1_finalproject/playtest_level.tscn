@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://gpmc4xytamqc"]
+
+[ext_resource type="PackedScene" uid="uid://decbf7e2myn5q" path="res://platform.tscn" id="1_et7la"]
+[ext_resource type="PackedScene" uid="uid://cgs5efdpmht1w" path="res://player_1_jumper.tscn" id="2_6dbrs"]
+[ext_resource type="PackedScene" uid="uid://db4hrbsbwjte2" path="res://player_2_portal.tscn" id="3_yhoga"]
+
+[node name="Playtest Level" type="Node2D"]
+
+[node name="Platform" parent="." instance=ExtResource("1_et7la")]
+position = Vector2(576, 275)
+
+[node name="Platform2" parent="." instance=ExtResource("1_et7la")]
+position = Vector2(576, 373)
+
+[node name="player_1_jumper" parent="." instance=ExtResource("2_6dbrs")]
+position = Vector2(400, 250)
+
+[node name="Player2" parent="." instance=ExtResource("3_yhoga")]
+position = Vector2(400, 350)
+scale = Vector2(0.25, 0.25)
