@@ -1,13 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6sojcxhuifr2"]
+[gd_scene load_steps=4 format=3 uid="uid://b6sojcxhuifr2"]
 
 [ext_resource type="Script" path="res://portal.gd" id="1_76fo4"]
+[ext_resource type="Texture2D" uid="uid://i60rwqs5810e" path="res://Sprites/FrogSprites/Rsit.png" id="2_13g5k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_47t7c"]
+radius = 70.0
+height = 146.0
 
 [node name="Portal" type="Area2D"]
 script = ExtResource("1_76fo4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_13g5k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_47t7c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
