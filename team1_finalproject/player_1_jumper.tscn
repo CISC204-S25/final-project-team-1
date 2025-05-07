@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgs5efdpmht1w"]
+
+[ext_resource type="Script" path="res://player_1_jumper.gd" id="1_1k48e"]
+[ext_resource type="Texture2D" uid="uid://dba8g25ewjfuc" path="res://icon.svg" id="2_n30wb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mke3"]
+
+[node name="player_1_jumper" type="CharacterBody2D"]
+script = ExtResource("1_1k48e")
+metadata/_edit_group_ = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4mke3")
+
+[node name="Placeholder" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, 9.53674e-07)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("2_n30wb")
