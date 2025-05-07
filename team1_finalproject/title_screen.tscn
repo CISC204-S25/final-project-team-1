@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dklnl83lw1vsa"]
+[gd_scene load_steps=4 format=3 uid="uid://dklnl83lw1vsa"]
 
 [ext_resource type="Script" path="res://title_screen.gd" id="1_oujti"]
+[ext_resource type="Texture2D" uid="uid://borl2agcxn1j2" path="res://Sprites/TitleScreenArt.PNG" id="2_bihfr"]
+[ext_resource type="FontFile" uid="uid://bvex18kkerm76" path="res://Assets/Howdy Frog.ttf" id="3_sgf8w"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -10,13 +12,20 @@ offset_bottom = 40.0
 script = ExtResource("1_oujti")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 1150.0
 offset_bottom = 644.0
 color = Color(0.627203, 0.710768, 0.683889, 1)
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_bihfr")
+
 [node name="GameTitle" type="Label" parent="."]
-modulate = Color(0.160784, 1, 1, 1)
+modulate = Color(0.132249, 0.332963, 0.292156, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -29,8 +38,12 @@ offset_right = 804.0
 offset_bottom = 156.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.161961, 0.461929, 0.448094, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_sgf8w")
 theme_override_font_sizes/font_size = 40
-text = "[Game Title Placeholder]"
+text = "Quagmire in a Quagmire"
 horizontal_alignment = 1
 
 [node name="StartGameButton" type="Button" parent="."]
@@ -39,6 +52,7 @@ offset_left = 288.0
 offset_top = 392.0
 offset_right = 468.0
 offset_bottom = 457.0
+theme_override_fonts/font = ExtResource("3_sgf8w")
 theme_override_font_sizes/font_size = 30
 text = "Start Game"
 
@@ -48,6 +62,7 @@ offset_left = 680.0
 offset_top = 392.0
 offset_right = 860.0
 offset_bottom = 457.0
+theme_override_fonts/font = ExtResource("3_sgf8w")
 theme_override_font_sizes/font_size = 30
 text = "Quit Game"
 

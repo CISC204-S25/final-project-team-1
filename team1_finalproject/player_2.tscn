@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://db4hrbsbwjte2"]
+
+[ext_resource type="Script" path="res://player_2.gd" id="1_88fks"]
+[ext_resource type="PackedScene" uid="uid://b6sojcxhuifr2" path="res://portal.tscn" id="2_ec3ea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs61g"]
+size = Vector2(137, 79)
+
+[node name="Player2" type="CharacterBody2D"]
+script = ExtResource("1_88fks")
+portal_scene = ExtResource("2_ec3ea")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 2.5)
+shape = SubResource("RectangleShape2D_qs61g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
