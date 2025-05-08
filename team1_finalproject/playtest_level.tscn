@@ -13,8 +13,9 @@ position = Vector2(576, 275)
 position = Vector2(576, 373)
 
 [node name="player_1_jumper" parent="." instance=ExtResource("2_6dbrs")]
-position = Vector2(400, 250)
+position = Vector2(390, 204)
+scale = Vector2(0.5, 0.5)
 
 [node name="Player2" parent="." instance=ExtResource("3_yhoga")]
-position = Vector2(400, 350)
-scale = Vector2(0.25, 0.25)
+position = Vector2(400, 334)
+scale = Vector2(0.4, 0.4)
