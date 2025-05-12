@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://f4cyc48ymf4s"
+path="res://.godot/imported/portalSound.mp3-3a5f06134e1ebfa13876199fd4fa9602.mp3str"
+
+[deps]
+
+source_file="res://Assets/music and sound effects/portalSound.mp3"
+dest_files=["res://.godot/imported/portalSound.mp3-3a5f06134e1ebfa13876199fd4fa9602.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
