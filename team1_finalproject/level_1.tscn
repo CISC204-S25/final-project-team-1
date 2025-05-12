@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://dt0mahwptihiu"]
+
+[ext_resource type="PackedScene" uid="uid://decbf7e2myn5q" path="res://platform.tscn" id="1_itwvd"]
+[ext_resource type="PackedScene" uid="uid://cgs5efdpmht1w" path="res://player_1_jumper.tscn" id="2_ox655"]
+[ext_resource type="PackedScene" uid="uid://db4hrbsbwjte2" path="res://player_2_portal.tscn" id="3_pl61t"]
+[ext_resource type="Script" path="res://Gatelvl1.gd" id="4_mu508"]
+[ext_resource type="Script" path="res://Gate2lvl1.gd" id="5_xgtnm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikdgq"]
+size = Vector2(92, 40)
+
+[node name="Level_1" type="Node2D"]
+
+[node name="player_1_jumper" parent="." instance=ExtResource("2_ox655")]
+position = Vector2(277, 140)
+scale = Vector2(0.25, 0.25)
+
+[node name="Player2" parent="." instance=ExtResource("3_pl61t")]
+position = Vector2(85, 781)
+scale = Vector2(0.25, 0.25)
+
+[node name="Platform" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(300, 206)
+
+[node name="Platform2" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(300, 816)
+
+[node name="Platform3" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(1150, 204)
+
+[node name="Platform4" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(1150, 460)
+
+[node name="Platform5" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(207, 342)
+
+[node name="Gate" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(860, 343)
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+script = ExtResource("4_mu508")
+
+[node name="Gate2" parent="." instance=ExtResource("1_itwvd")]
+visible = false
+position = Vector2(664, 409)
+scale = Vector2(0.35, 0.35)
+script = ExtResource("5_xgtnm")
+
+[node name="Platform7" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(589, 751)
+rotation = 1.5708
+scale = Vector2(0.25, 1)
+
+[node name="Platform8" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(299, 686)
+
+[node name="Platform9" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(10, 751)
+rotation = 1.5708
+scale = Vector2(0.25, 1)
+
+[node name="Platform10" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(879, 816)
+
+[node name="Platform11" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(1168, 751)
+rotation = 1.5708
+scale = Vector2(0.25, 1)
+
+[node name="Platform12" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(878, 686)
+
+[node name="Platform13" parent="." instance=ExtResource("1_itwvd")]
+position = Vector2(589, 751)
+rotation = 1.5708
+scale = Vector2(0.25, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1107, 786)
+shape = SubResource("RectangleShape2D_ikdgq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 922.0
+offset_top = 418.0
+offset_right = 1073.0
+offset_bottom = 446.0
+text = "Portal power here"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1046.0
+offset_top = 723.0
+offset_right = 1119.0
+offset_bottom = 761.0
+text = "Button for the platform called \"Gate\" to move to make a platform for the frog to jump across here"
+
+[connection signal="area_entered" from="Area2D" to="Gate" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Area2D" to="Gate2" method="_on_area_2d_area_entered"]
