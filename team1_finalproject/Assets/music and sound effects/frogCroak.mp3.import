@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/frogCroak.mp3-c3c47497c929e12ffb1eac6c5710d41
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

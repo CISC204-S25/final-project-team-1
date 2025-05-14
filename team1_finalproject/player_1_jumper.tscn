@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgs5efdpmht1w"]
+[gd_scene load_steps=11 format=3 uid="uid://cgs5efdpmht1w"]
 
 [ext_resource type="Script" path="res://player_1_jumper.gd" id="1_1k48e"]
 [ext_resource type="Texture2D" uid="uid://i60rwqs5810e" path="res://Sprites/FrogSprites/Rsit.png" id="2_0qv1r"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c3bq6o1yyn168" path="res://Sprites/FrogSprites/Ljump.png" id="4_230x7"]
 [ext_resource type="Texture2D" uid="uid://cuvlk6npusv7y" path="res://Sprites/FrogSprites/Lland.png" id="5_3057y"]
 [ext_resource type="Texture2D" uid="uid://bxlpjqaekmg5n" path="res://Sprites/FrogSprites/Rland.png" id="7_m6nr8"]
+[ext_resource type="AudioStream" uid="uid://cc3fycavccnw0" path="res://Assets/music and sound effects/frogCroak1.mp3" id="8_wh75f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mke3"]
 size = Vector2(155, 151)
@@ -80,3 +81,7 @@ shape = SubResource("RectangleShape2D_4mke3")
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_4uvdc")
 animation = &"fall"
+
+[node name="Ribbit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_wh75f")
+volume_db = -12.181

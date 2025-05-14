@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cc3fycavccnw0"
+path="res://.godot/imported/frogCroak1.mp3-df183e9cdf8ef97d4c0372748648aec8.mp3str"
+
+[deps]
+
+source_file="res://Assets/music and sound effects/frogCroak1.mp3"
+dest_files=["res://.godot/imported/frogCroak1.mp3-df183e9cdf8ef97d4c0372748648aec8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
