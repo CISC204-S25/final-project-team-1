@@ -4,6 +4,9 @@ extends CharacterBody2D
 @export var speed = 400
 @export var gravity = 1500
 @export var portal_scene: PackedScene
+@onready var walking = $Walk
+@onready var portal_sound = $Portal
+	
 
 var portal_cooldown := false
 var portals: Array = []
@@ -13,6 +16,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 		
 	var direction := Input.get_axis("move_left", "move_right")
+	walking.play()
 	if direction:
 		velocity.x = direction * speed
 	else:
@@ -22,6 +26,7 @@ func _physics_process(delta: float) -> void:
 
 #function for creating portal
 func spawn_portal(target_position: Vector2) -> void:
+	portal_sound.play()
 	if portal_scene:
 		var portal = portal_scene.instantiate()
 		portal.global_position = target_position

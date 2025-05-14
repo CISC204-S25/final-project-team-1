@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://db4hrbsbwjte2"]
+[gd_scene load_steps=7 format=3 uid="uid://db4hrbsbwjte2"]
 
 [ext_resource type="Script" path="res://player_2.gd" id="1_88fks"]
 [ext_resource type="PackedScene" uid="uid://b6sojcxhuifr2" path="res://portal.tscn" id="2_ec3ea"]
 [ext_resource type="Texture2D" uid="uid://4eoyfgfdkxlf" path="res://Sprites/SalamanderSprites/Salamander_idle.PNG" id="3_jpnc2"]
+[ext_resource type="AudioStream" uid="uid://dbp88g4ph4iwr" path="res://Assets/music and sound effects/SalaWalk.mp3" id="4_3v7lk"]
+[ext_resource type="AudioStream" uid="uid://f4cyc48ymf4s" path="res://Assets/music and sound effects/portalSound.mp3" id="5_qai17"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs61g"]
 size = Vector2(279, 110)
@@ -21,3 +23,9 @@ shape = SubResource("RectangleShape2D_qs61g")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_jpnc2")
+
+[node name="Walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3v7lk")
+
+[node name="Portal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qai17")
