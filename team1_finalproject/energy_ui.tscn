@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx387ksl8nb5b"]
+
+[ext_resource type="Script" path="res://energy_ui.gd" id="1_bdd56"]
+[ext_resource type="FontFile" uid="uid://bvex18kkerm76" path="res://Assets/Howdy Frog.ttf" id="2_s4lmc"]
+
+[node name="EnergyUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bdd56")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("2_s4lmc")
+show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_s4lmc")
+
+[node name="EnergyWarningLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -23.0
+offset_right = 85.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_s4lmc")
+text = "Not enough energy!"

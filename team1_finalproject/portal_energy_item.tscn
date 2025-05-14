@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://1dv6k642ssyj"]
+
+[ext_resource type="Script" path="res://portal_energy_item.gd" id="1_l43yr"]
+[ext_resource type="Texture2D" uid="uid://ck3pi205xg3fw" path="res://Sprites/PortalSprites/PEnergy.png" id="2_npspi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_80aal"]
+radius = 36.1248
+
+[node name="PortalEnergyItem" type="Area2D"]
+script = ExtResource("1_l43yr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_npspi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 13)
+shape = SubResource("CircleShape2D_80aal")

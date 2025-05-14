@@ -19,32 +19,23 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		frog_sound.play()
+		sprite.play("jump")
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("move_leftp1", "move_rightp1")
-	if direction !=0:
+	if direction:
 		velocity.x = direction * SPEED
+		sprite.flip_h = direction < 0
+		if is_on_floor() and sprite.animation != "move_right":
+			sprite.play("move_right")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
+		if is_on_floor() and sprite.animation != "idle":
+			sprite.play("idle")
+	if not is_on_floor():
+		if velocity.y < 0 and sprite.animation != "jump":
+			sprite.play("jump")
+		elif velocity.y > 0 and sprite.animation != "fall":
+			sprite.play("fall")
+
 			
 	move_and_slide()
-
-#animations
-	if not is_on_floor():
-		sprite.flip_h = direction < 0
-		if velocity.y < 0:
-			if sprite.animation != "jump":
-				sprite.play("jump")
-		elif velocity.y > 0:
-			if sprite.animation != "fall":
-				sprite.play("fall")
-	else:
-		if direction != 0:
-			var walk_animation = "move_right" if direction > 0 else "move_left"
-			if sprite.animation != walk_animation:
-				sprite.play(walk_animation)
-		else:
-			if sprite.animation != "idle":
-				sprite.play("idle")
