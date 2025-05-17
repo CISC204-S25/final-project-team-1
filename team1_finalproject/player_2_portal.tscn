@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://db4hrbsbwjte2"]
+[gd_scene load_steps=16 format=3 uid="uid://db4hrbsbwjte2"]
 
 [ext_resource type="Script" path="res://player_2.gd" id="1_88fks"]
 [ext_resource type="PackedScene" uid="uid://b6sojcxhuifr2" path="res://portal.tscn" id="2_ec3ea"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bc5eb1csa70js" path="res://Sprites/SalamanderSprites/Salamander_walk_6.PNG" id="10_f4eo8"]
 [ext_resource type="Texture2D" uid="uid://bfaqslujvtn8d" path="res://Sprites/SalamanderSprites/Salamander_walk__7.PNG" id="11_1qi16"]
 [ext_resource type="Texture2D" uid="uid://cmxlofnr01c81" path="res://Sprites/SalamanderSprites/Salamander_walk_8.PNG" id="12_igphb"]
+[ext_resource type="AudioStream" uid="uid://bjhgxhuk1yhc7" path="res://Assets/music and sound effects/salamanderWalk.mp3" id="13_1pi3n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs61g"]
 size = Vector2(279, 103)
@@ -82,3 +83,7 @@ shape = SubResource("RectangleShape2D_qs61g")
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_spdnr")
 animation = &"shoot"
+
+[node name="walkNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_1pi3n")
+volume_db = -2.811

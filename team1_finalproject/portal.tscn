@@ -1,20 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6sojcxhuifr2"]
+[gd_scene load_steps=7 format=3 uid="uid://b6sojcxhuifr2"]
 
 [ext_resource type="Script" path="res://portal.gd" id="1_76fo4"]
 [ext_resource type="Texture2D" uid="uid://cw63dkxidsvm4" path="res://Sprites/PortalSprites/MedPortal.png" id="2_xr5ta"]
+[ext_resource type="Texture2D" uid="uid://52or3fv7y58x" path="res://Sprites/PortalSprites/big portal.png" id="3_c27vl"]
+[ext_resource type="Texture2D" uid="uid://2kule51yophx" path="res://Sprites/PortalSprites/babyPortal.png" id="4_7e4ov"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_47t7c"]
 radius = 26.0
 height = 80.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_wopm5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7e4ov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xr5ta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c27vl")
+}],
+"loop": false,
+"name": &"spawn_portal",
+"speed": 5.0
+}]
+
 [node name="Portal" type="Area2D"]
 script = ExtResource("1_76fo4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_xr5ta")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_47t7c")
+
+[node name="PortalAnimatedSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_wopm5")
+animation = &"spawn_portal"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

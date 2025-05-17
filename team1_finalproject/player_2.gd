@@ -5,10 +5,12 @@ extends CharacterBody2D
 @export var gravity = 1500
 @export var portal_scene: PackedScene
 @onready var sprite = $AnimatedSprite2D
+@onready var salamander_sound = $walkNoise
 var is_shooting = false
 var portal_cooldown := false
 var portals: Array = []
 const portal_cost := 20
+
 
 func _physics_process(delta: float) -> void:
 	if is_shooting:
@@ -22,10 +24,12 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = direction > 0
 		if is_on_floor() and sprite.animation != "walk":
 			sprite.play("walk")
+			salamander_sound.play()
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		if is_on_floor() and sprite.animation != "idle":
 			sprite.play("idle")
+			salamander_sound.stop()
 
 	move_and_slide()
 
