@@ -1,6 +1,5 @@
 extends Area2D
 
-signal portal_entered(portal: Node)
 var linked_portal: Area2D = null
 @onready var portalAnimation = $PortalAnimatedSprite
 

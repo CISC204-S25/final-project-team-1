@@ -10,6 +10,7 @@ var is_shooting = false
 var portal_cooldown := false
 var portals: Array = []
 const portal_cost := 20
+const max_portal_y := 745  #minimum y value allowed for portals to spawn
 
 
 func _physics_process(delta: float) -> void:
@@ -30,6 +31,9 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor() and sprite.animation != "idle":
 			sprite.play("idle")
 			salamander_sound.stop()
+	var camera = get_viewport().get_camera_2d()
+	if camera:
+		clamp_player2_to_camera(camera)
 
 	move_and_slide()
 
@@ -64,6 +68,13 @@ func spawn_portal(target_position: Vector2) -> void:
 
 #function to try creating a portal while checking energy
 func try_create_portal() -> void:
+	var target_position := get_global_mouse_position()
+	#prevent creating portal above y threshold
+	if target_position.y < max_portal_y:
+		var ui = get_tree().current_scene.get_node("/root/Level_1/CanvasLayer/OutOfBoundsWarning")
+		ui.show_warning("Can't place portal at this height!")
+		return
+		
 	if PortalEnergy.consume_energy(portal_cost):
 		spawn_portal(get_global_mouse_position())
 	else:
@@ -83,3 +94,15 @@ func start_portal_cooldown():
 	portal_cooldown = true
 	await get_tree().create_timer(0.5).timeout
 	portal_cooldown = false
+	
+#prevent player 2 from moving off screen	
+func clamp_player2_to_camera(camera: Camera2D):
+	var screen_size = get_viewport().get_visible_rect().size
+	var half_screen = screen_size * 0.5 * camera.zoom
+	var cam_pos = camera.global_position
+
+	var min_bound = cam_pos - half_screen
+	var max_bound = cam_pos + half_screen
+
+	global_position.x = clamp(global_position.x, min_bound.x, max_bound.x)
+	global_position.y = clamp(global_position.y, min_bound.y, max_bound.y)

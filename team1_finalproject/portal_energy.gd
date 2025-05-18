@@ -5,15 +5,12 @@ var current_energy := 0
 
 func add_energy(amount: int):
 	current_energy = clamp(current_energy + amount, 0, max_energy)
-	emit_signal("energy_changed")
 
 func consume_energy(amount: int) -> bool:
 	if current_energy >= amount:
 		current_energy -= amount
-		emit_signal("energy_changed")
 		return true
 	return false
 
 func get_energy_percent() -> float:
 	return float(current_energy) / max_energy
-signal energy_changed
