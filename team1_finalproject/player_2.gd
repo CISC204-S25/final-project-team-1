@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var gravity = 1500
 @export var portal_scene: PackedScene
 @onready var walk_sound = $walkNoise
-@onready var portal_sound = $Portal
+@onready var portal_sound = $PortalSound
 	
 
 @onready var sprite = $AnimatedSprite2D
