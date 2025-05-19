@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dt0mahwptihiu"]
+[gd_scene load_steps=18 format=3 uid="uid://dt0mahwptihiu"]
 
 [ext_resource type="Texture2D" uid="uid://clr4fesujciga" path="res://Sprites/Bg_level_1.PNG" id="1_2t5c7"]
 [ext_resource type="PackedScene" uid="uid://decbf7e2myn5q" path="res://platform.tscn" id="1_itwvd"]
@@ -14,9 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://cwck0xemw7wnb" path="res://ground_platform.tscn" id="12_ycpxu"]
 [ext_resource type="PackedScene" uid="uid://b43mhyyvhjejb" path="res://stone_platform.tscn" id="13_ebwai"]
 [ext_resource type="PackedScene" uid="uid://rat4r85ag2yw" path="res://dirt.tscn" id="14_ev61v"]
+[ext_resource type="Script" path="res://Boundary.gd" id="15_yiuff"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ikdgq"]
 size = Vector2(92, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ny8b"]
+size = Vector2(6232, 178)
 
 [node name="Level_1" type="Node2D"]
 
@@ -190,5 +194,16 @@ position = Vector2(-391, 1219)
 [node name="Dirt4" parent="." instance=ExtResource("14_ev61v")]
 position = Vector2(-91, 1219)
 
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(929, 1130)
+script = ExtResource("15_yiuff")
+
+[node name="boundary" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_1ny8b")
+debug_color = Color(0.746247, 0.433979, 0.436057, 0.42)
+
 [connection signal="area_entered" from="Area2D" to="Gate" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Area2D" to="Gate2" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D2" to="player_1_jumper" method="_on_area_2d_2_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="Player2" method="_on_area_2d_2_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]

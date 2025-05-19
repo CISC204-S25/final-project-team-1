@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bc5eb1csa70js" path="res://Sprites/SalamanderSprites/Salamander_walk_6.PNG" id="10_f4eo8"]
 [ext_resource type="Texture2D" uid="uid://bfaqslujvtn8d" path="res://Sprites/SalamanderSprites/Salamander_walk__7.PNG" id="11_1qi16"]
 [ext_resource type="Texture2D" uid="uid://cmxlofnr01c81" path="res://Sprites/SalamanderSprites/Salamander_walk_8.PNG" id="12_igphb"]
-[ext_resource type="AudioStream" uid="uid://bjhgxhuk1yhc7" path="res://Assets/music and sound effects/salamanderWalk.mp3" id="13_1pi3n"]
+[ext_resource type="AudioStream" uid="uid://dbp88g4ph4iwr" path="res://Assets/music and sound effects/SalaWalk.mp3" id="13_rybsd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs61g"]
 size = Vector2(244.428, 78.2055)
@@ -91,8 +91,8 @@ animation = &"shoot"
 metadata/_edit_lock_ = true
 
 [node name="walkNoise" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("13_1pi3n")
-volume_db = -2.811
+stream = ExtResource("13_rybsd")
+volume_db = 3.627
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(3, 22)

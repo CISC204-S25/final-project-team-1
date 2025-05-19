@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var speed = 350
 @export var gravity = 1500
 @export var portal_scene: PackedScene
-@onready var walking = $Walk
+@onready var walk_sound = $walkNoise
 @onready var portal_sound = $Portal
 	
 
@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 		
 	var direction := Input.get_axis("move_left", "move_right")
-	walking.play()
+	walk_sound.play()
 	if direction:
 		velocity.x = direction * speed
 		sprite.flip_h = direction > 0
@@ -112,3 +112,7 @@ func clamp_player2_to_camera(camera: Camera2D):
 
 	global_position.x = clamp(global_position.x, min_bound.x, max_bound.x)
 	global_position.y = clamp(global_position.y, min_bound.y, max_bound.y)
+
+
+func _on_area_2d_2_body_entered(body: Node2D) -> void:
+	position = Vector2(-1107, 966)
