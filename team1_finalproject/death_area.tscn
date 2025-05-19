@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8t3xotu8lifa"]
+
+[ext_resource type="Texture2D" uid="uid://dtxm7ccigdnpb" path="res://Sprites/Environment/DeadlySwamp_.PNG" id="1_q3xla"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vl25"]
+size = Vector2(304, 256)
+
+[node name="DeathArea" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_q3xla")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_8vl25")

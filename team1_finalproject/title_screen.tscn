@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dklnl83lw1vsa"]
+[gd_scene load_steps=5 format=3 uid="uid://dklnl83lw1vsa"]
 
 [ext_resource type="Script" path="res://title_screen.gd" id="1_oujti"]
 [ext_resource type="Texture2D" uid="uid://borl2agcxn1j2" path="res://Sprites/TitleScreenArt.PNG" id="2_bihfr"]
 [ext_resource type="FontFile" uid="uid://bvex18kkerm76" path="res://Assets/Howdy Frog.ttf" id="3_sgf8w"]
+[ext_resource type="AudioStream" uid="uid://dmjarlixipf0j" path="res://Assets/music and sound effects/swamp.ogg" id="4_cmvpb"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -65,6 +66,11 @@ offset_bottom = 457.0
 theme_override_fonts/font = ExtResource("3_sgf8w")
 theme_override_font_sizes/font_size = 30
 text = "Quit Game"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_cmvpb")
+autoplay = true
+parameters/looping = false
 
 [connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="QuitGameButton" to="." method="_on_quit_game_button_pressed"]

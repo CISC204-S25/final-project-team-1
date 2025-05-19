@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dmjarlixipf0j"
+path="res://.godot/imported/swamp.ogg-2b8dcedd6327f3760a8b1766d95b6f7e.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/music and sound effects/swamp.ogg"
+dest_files=["res://.godot/imported/swamp.ogg-2b8dcedd6327f3760a8b1766d95b6f7e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
