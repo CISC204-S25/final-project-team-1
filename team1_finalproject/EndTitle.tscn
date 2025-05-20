@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0jx4plxloqvx"]
+
+[ext_resource type="Texture2D" uid="uid://bv0y3kk235l30" path="res://Sprites/EndScreen.png" id="1_bvets"]
+[ext_resource type="Script" path="res://end_title.gd" id="1_c8vn1"]
+[ext_resource type="AudioStream" uid="uid://db7t5t6h4x7ve" path="res://Assets/music and sound effects/crowd_small_chil_ec049202_9klCwI6.mp3" id="2_picwf"]
+[ext_resource type="FontFile" uid="uid://bvex18kkerm76" path="res://Assets/Howdy Frog.ttf" id="2_yl2l1"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c8vn1")
+
+[node name="Celebrate" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(569, 320)
+stream = ExtResource("2_picwf")
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1147.0
+offset_bottom = 650.0
+color = Color(0.999999, 0.770907, 0.3691, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 1123.0
+offset_bottom = 649.0
+texture = ExtResource("1_bvets")
+expand_mode = 1
+
+[node name="Return to Title" type="Button" parent="."]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 540.0
+offset_right = 476.0
+offset_bottom = 612.0
+theme_override_fonts/font = ExtResource("2_yl2l1")
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 689.0
+offset_top = 544.0
+offset_right = 898.0
+offset_bottom = 615.0
+theme_override_fonts/font = ExtResource("2_yl2l1")
+theme_override_font_sizes/font_size = 30
+text = "Quit Game"
+
+[connection signal="pressed" from="Return to Title" to="." method="_on_return_to_title_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
