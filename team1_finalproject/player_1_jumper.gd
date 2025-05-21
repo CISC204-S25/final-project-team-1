@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
-		var collision = get_slide_collision(0)
+		var collision = get_slide_collision(0) #ensures player stays on moving platforms
 		if collision:
 			var collider = collision.get_collider()
 			if collider is CharacterBody2D and collider.name == "MovingPlatform":
@@ -44,6 +44,7 @@ func _physics_process(delta: float) -> void:
 		elif velocity.y > 0 and sprite.animation != "fall":
 			sprite.play("fall")
 
+#check if distance from other player exceeds maximum distance then stops movement if it does
 	var next_position = global_position + Vector2(direction * SPEED * delta, 0)
 	var distance = next_position.distance_to(other_player.global_position)
 
@@ -53,12 +54,12 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 
 	if is_on_floor():
-		respawn_position = global_position
+		respawn_position = global_position #update last position for respawning
 		check_platform_collision()
 			
 	move_and_slide()
 
-#to prevent errors with moving platform
+#prevent errors with moving platform by checking collisions
 func check_platform_collision():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)

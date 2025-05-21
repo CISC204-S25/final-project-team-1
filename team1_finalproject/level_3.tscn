@@ -356,16 +356,22 @@ scale = Vector2(0.5, 0.5)
 visible = false
 position = Vector2(214, 529)
 scale = Vector2(0.2, 0.2)
+collision_layer = 0
+collision_mask = 0
 
 [node name="StonePlatform11" parent="." instance=ExtResource("17_07xin")]
 visible = false
 position = Vector2(311, 414)
 scale = Vector2(0.2, 0.2)
+collision_layer = 0
+collision_mask = 0
 
 [node name="StonePlatform12" parent="." instance=ExtResource("17_07xin")]
 visible = false
 position = Vector2(425, 334)
 scale = Vector2(0.5, 0.3)
+collision_layer = 0
+collision_mask = 0
 
 [node name="BlueButton" parent="." instance=ExtResource("18_krwi0")]
 position = Vector2(-1054, 659)

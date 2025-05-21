@@ -294,6 +294,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.0
 grow_vertical = 1
+next_scene = "res://level_3.tscn"
 
 [node name="EnergyUI" parent="CanvasLayer" instance=ExtResource("11_l1a52")]
 anchors_preset = 5
