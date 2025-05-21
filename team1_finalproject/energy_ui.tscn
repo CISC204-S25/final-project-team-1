@@ -12,7 +12,7 @@ script = ExtResource("1_bdd56")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_right = 4.0
+offset_right = 143.0
 offset_bottom = 27.0
 theme_override_fonts/font = ExtResource("2_s4lmc")
 show_percentage = false

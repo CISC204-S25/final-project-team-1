@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcmawj6uwy3nv"]
+
+[ext_resource type="Texture2D" uid="uid://bvi5y32e2ae1m" path="res://Sprites/PinkButton.PNG" id="1_aytgl"]
+[ext_resource type="Script" path="res://pink_button.gd" id="1_u4hd2"]
+[ext_resource type="Texture2D" uid="uid://drvw253354m55" path="res://Sprites/PinkButtonPressed.PNG" id="2_j1hhl"]
+[ext_resource type="AudioStream" uid="uid://m7t76gxpquj4" path="res://Assets/music and sound effects/button.mp3" id="3_sovty"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_momo6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_aytgl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j1hhl")
+}],
+"loop": false,
+"name": &"ButtonPressed",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0kocu"]
+radius = 43.0
+height = 142.0
+
+[node name="PinkButton" type="Area2D"]
+collision_mask = 7
+script = ExtResource("1_u4hd2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_momo6")
+animation = &"ButtonPressed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(50, 0)
+shape = SubResource("CapsuleShape2D_0kocu")
+
+[node name="ButtonClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sovty")

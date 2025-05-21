@@ -27,6 +27,7 @@ animations = [{
 }]
 
 [node name="Portal" type="Area2D"]
+collision_mask = 7
 script = ExtResource("1_76fo4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

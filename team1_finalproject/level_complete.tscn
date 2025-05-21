@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8krai5m4jtmp"]
+
+[ext_resource type="FontFile" uid="uid://bvex18kkerm76" path="res://Assets/Howdy Frog.ttf" id="1_lv2hf"]
+[ext_resource type="Script" path="res://level_complete.gd" id="1_y50f0"]
+
+[node name="Control" type="Control"]
+visibility_layer = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y50f0")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -176.0
+offset_top = -1.0
+offset_right = 182.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("1_lv2hf")
+theme_override_font_sizes/font_size = 40
+text = "Level Completed!"
+
+[node name="ReplayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -500.0
+offset_top = 288.0
+offset_right = -264.0
+offset_bottom = 369.0
+theme_override_fonts/font = ExtResource("1_lv2hf")
+theme_override_font_sizes/font_size = 35
+text = "Replay Level"
+
+[node name="NextSceneButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -100.0
+offset_top = 288.0
+offset_right = 136.0
+offset_bottom = 369.0
+theme_override_fonts/font = ExtResource("1_lv2hf")
+theme_override_font_sizes/font_size = 35
+text = "Next"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 288.0
+offset_right = 511.0
+offset_bottom = 369.0
+theme_override_fonts/font = ExtResource("1_lv2hf")
+theme_override_font_sizes/font_size = 35
+text = "Quit"
+
+[connection signal="pressed" from="ReplayButton" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="NextSceneButton" to="." method="_on_next_scene_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

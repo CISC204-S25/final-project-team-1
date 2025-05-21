@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://f4cyc48ymf4s" path="res://Assets/music and sound effects/portalSound.mp3" id="14_icn8c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs61g"]
-size = Vector2(262.623, 66.9822)
+size = Vector2(244.428, 78.2055)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_spdnr"]
 animations = [{
@@ -71,18 +71,19 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tqqsj"]
 radius = 21.0
-height = 180.0
+height = 274.0
 
-[node name="Player2" type="CharacterBody2D" groups=["player", "player2"]]
-collision_layer = 4
-collision_mask = 9
+[node name="Player2" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_88fks")
 gravity = 500
 portal_scene = ExtResource("2_ec3ea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6.31131, -12.5089)
+position = Vector2(-13.1442, -17.784)
+skew = -0.776672
 shape = SubResource("RectangleShape2D_qs61g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -92,13 +93,13 @@ metadata/_edit_lock_ = true
 
 [node name="walkNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_rybsd")
-volume_db = 2.655
+volume_db = 3.627
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(-37, 21)
+position = Vector2(3, 22)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_tqqsj")
 
 [node name="PortalSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_icn8c")
-volume_db = -13.477
+volume_db = -8.883

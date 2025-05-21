@@ -4,44 +4,70 @@ extends CharacterBody2D
 @export var speed = 350
 @export var gravity = 1500
 @export var portal_scene: PackedScene
+@export var max_player_distance := 950 #max distance from other player
+@export var other_player: Node2D
+@export var max_portal_y := 950  #minimum y value allowed for portals to spawn
 @onready var walk_sound = $walkNoise
 @onready var portal_sound = $PortalSound
-	
-
 @onready var sprite = $AnimatedSprite2D
-@onready var salamander_sound = $walkNoise
+@onready var respawn_position: Vector2 = global_position
+
+
 var is_shooting = false
 var portal_cooldown := false
 var portals: Array = []
 const portal_cost := 20
-const max_portal_y := 745  #minimum y value allowed for portals to spawn
 
-
+	
 func _physics_process(delta: float) -> void:
 	if is_shooting:
 		return
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		
+	else:
+		var collision = get_slide_collision(0)
+		if collision:
+			var collider = collision.get_collider()
+			if collider is CharacterBody2D and collider.name == "MovingPlatform":
+				velocity.x += collider.velocity.x
 	var direction := Input.get_axis("move_left", "move_right")
-	walk_sound.play()
 	if direction:
 		velocity.x = direction * speed
 		sprite.flip_h = direction > 0
 		if is_on_floor() and sprite.animation != "walk":
 			sprite.play("walk")
-			salamander_sound.play()
+			if not walk_sound.playing:
+				walk_sound.play()
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		if is_on_floor() and sprite.animation != "idle":
 			sprite.play("idle")
-			salamander_sound.stop()
-	var camera = get_viewport().get_camera_2d()
-	if camera:
-		clamp_player2_to_camera(camera)
+			if walk_sound.playing:
+				walk_sound.stop()
 
+	var next_position = global_position + Vector2(direction * speed * delta, 0)
+	var distance = next_position.distance_to(other_player.global_position)
+
+	if distance <= max_player_distance:
+		velocity.x = direction * speed
+	else:
+		velocity.x = 0
+		
+	if is_on_floor():
+		respawn_position = global_position
+		check_platform_collision()
+		
 	move_and_slide()
-
+	
+#to prevent errors with moving platform
+func check_platform_collision():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision:
+			var collider = collision.get_collider()
+			if collider is CharacterBody2D and collider.name == "MovingPlatform":
+				velocity.x += collider.velocity.x
+	
 #function for creating portal
 func spawn_portal(target_position: Vector2) -> void:
 	portal_sound.play()
@@ -72,13 +98,45 @@ func spawn_portal(target_position: Vector2) -> void:
 		else:
 			sprite.play("idle")
 
-#function to try creating a portal while checking energy
+#avoid placing portals over static body 2Ds and the player themself
+@warning_ignore("shadowed_variable_base_class")
+func portal_placement_check(position: Vector2, size: Vector2) -> bool:
+	var space_state = get_world_2d().direct_space_state
+	var shape = CapsuleShape2D.new()
+	shape.radius = size.x / 2
+	shape.height = size.y - size.x
+	var transform = Transform2D()
+	transform.origin = position
+
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = shape
+	query.transform = Transform2D(0, position)
+	query.collision_mask = 1
+	query.exclude = [self]
+
+	var result = space_state.intersect_shape(query, 1)
+	return result.is_empty()
+
+#function to try creating a portal while checking energy and position
 func try_create_portal() -> void:
 	var target_position := get_global_mouse_position()
 	#prevent creating portal above y threshold
 	if target_position.y < max_portal_y:
-		var ui = get_tree().current_scene.get_node("/root/Level_1/CanvasLayer/OutOfBoundsWarning")
+		var ui = get_tree().current_scene.get_node("CanvasLayer/OutOfBoundsWarning")
 		ui.show_warning("Can't place portal at this height!")
+		return
+		
+	var portal = portal_scene.instantiate()
+	var shape_node = portal.get_node("CollisionShape2D")
+	var shape = shape_node.shape as CapsuleShape2D
+	var portal_size = Vector2(52, 160)
+	if shape:
+		var width = shape.radius * 2
+		var height = shape.height + shape.radius * 2
+		portal_size = Vector2(width, height)
+	if not portal_placement_check(target_position, portal_size):
+		var ui = get_tree().current_scene.get_node("CanvasLayer/OutOfBoundsWarning")
+		ui.show_warning("Can't place portal here!")
 		return
 		
 	if PortalEnergy.consume_energy(portal_cost):
@@ -96,23 +154,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_portal_entered(portal_area: Area2D) -> void:
 	spawn_portal(portal_area.global_position)
 
+#avoid teleporting again immediately after going through portal
 func start_portal_cooldown():
 	portal_cooldown = true
 	await get_tree().create_timer(0.5).timeout
 	portal_cooldown = false
 	
-#prevent player 2 from moving off screen	
-func clamp_player2_to_camera(camera: Camera2D):
-	var screen_size = get_viewport().get_visible_rect().size
-	var half_screen = screen_size * 0.5 * camera.zoom
-	var cam_pos = camera.global_position
-
-	var min_bound = cam_pos - half_screen
-	var max_bound = cam_pos + half_screen
-
-	global_position.x = clamp(global_position.x, min_bound.x, max_bound.x)
-	global_position.y = clamp(global_position.y, min_bound.y, max_bound.y)
-
-
-func _on_area_2d_2_body_entered(body: Node2D) -> void:
-	position = Vector2(-1107, 966)

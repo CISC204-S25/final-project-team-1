@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d1xw63kjrh1np"
+path="res://.godot/imported/35 Lost Woods_edited.mp3-6664f673cb40acdb4153fd2f51e1dcd6.mp3str"
+
+[deps]
+
+source_file="res://Assets/music and sound effects/35 Lost Woods_edited.mp3"
+dest_files=["res://.godot/imported/35 Lost Woods_edited.mp3-6664f673cb40acdb4153fd2f51e1dcd6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

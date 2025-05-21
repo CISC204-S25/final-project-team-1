@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://tmdxrymjkvdj"]
+
+[ext_resource type="Texture2D" uid="uid://60l0sl3cdo3c" path="res://Sprites/Environment/StoneGround.PNG" id="1_m6872"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2jpe"]
+size = Vector2(120, 722)
+
+[node name="StonePillar" type="StaticBody2D"]
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_m6872")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 120)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_m6872")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(0, 240)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_m6872")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(0, 360)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_m6872")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(0, 480)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_m6872")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(0, 600)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_m6872")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 300)
+shape = SubResource("RectangleShape2D_j2jpe")

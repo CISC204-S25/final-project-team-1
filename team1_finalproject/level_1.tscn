@@ -1,23 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://dt0mahwptihiu"]
+[gd_scene load_steps=21 format=3 uid="uid://dt0mahwptihiu"]
 
 [ext_resource type="Texture2D" uid="uid://clr4fesujciga" path="res://Sprites/Bg_level_1.PNG" id="1_2t5c7"]
-[ext_resource type="PackedScene" uid="uid://decbf7e2myn5q" path="res://platform.tscn" id="1_itwvd"]
 [ext_resource type="PackedScene" uid="uid://cgs5efdpmht1w" path="res://player_1_jumper.tscn" id="2_ox655"]
 [ext_resource type="PackedScene" uid="uid://bx387ksl8nb5b" path="res://energy_ui.tscn" id="2_rwncp"]
+[ext_resource type="PackedScene" uid="uid://c8krai5m4jtmp" path="res://level_complete.tscn" id="2_w5wj5"]
 [ext_resource type="FontFile" uid="uid://bvex18kkerm76" path="res://Assets/Howdy Frog.ttf" id="3_nyokt"]
 [ext_resource type="PackedScene" uid="uid://db4hrbsbwjte2" path="res://player_2_portal.tscn" id="3_pl61t"]
 [ext_resource type="Script" path="res://out_of_bounds_warning.gd" id="4_0xnq8"]
-[ext_resource type="Script" path="res://Gatelvl1.gd" id="4_mu508"]
-[ext_resource type="Script" path="res://Gate2lvl1.gd" id="5_xgtnm"]
+[ext_resource type="Script" path="res://restart_button.gd" id="6_1fblh"]
 [ext_resource type="AudioStream" uid="uid://wbks75hyabcj" path="res://Assets/music and sound effects/BgMusic.mp3" id="6_qvqx5"]
 [ext_resource type="PackedScene" uid="uid://1dv6k642ssyj" path="res://portal_energy_item.tscn" id="8_ii2cj"]
 [ext_resource type="PackedScene" uid="uid://cwck0xemw7wnb" path="res://ground_platform.tscn" id="12_ycpxu"]
 [ext_resource type="PackedScene" uid="uid://b43mhyyvhjejb" path="res://stone_platform.tscn" id="13_ebwai"]
 [ext_resource type="PackedScene" uid="uid://rat4r85ag2yw" path="res://dirt.tscn" id="14_ev61v"]
-[ext_resource type="Script" path="res://Boundary.gd" id="15_yiuff"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikdgq"]
-size = Vector2(92, 40)
+[ext_resource type="Script" path="res://death_area.gd" id="15_yiuff"]
+[ext_resource type="Texture2D" uid="uid://dtxm7ccigdnpb" path="res://Sprites/Environment/DeadlySwamp_.PNG" id="16_nlm6g"]
+[ext_resource type="Script" path="res://PlayerCamera.gd" id="17_qtjna"]
+[ext_resource type="PackedScene" uid="uid://tmdxrymjkvdj" path="res://stone_pillar.tscn" id="18_eg7dn"]
+[ext_resource type="PackedScene" uid="uid://cm22gkguevbb" path="res://goal_area.tscn" id="19_m2goa"]
+[ext_resource type="PackedScene" uid="uid://bxe6xjxw2yet6" path="res://blue_button.tscn" id="20_v5ewl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ny8b"]
 size = Vector2(6232, 178)
@@ -39,6 +40,14 @@ scale = Vector2(1.5, 2)
 texture = ExtResource("1_2t5c7")
 metadata/_edit_lock_ = true
 
+[node name="TextureRect4" type="TextureRect" parent="."]
+offset_left = -3427.0
+offset_right = -2285.0
+offset_bottom = 648.0
+scale = Vector2(1.5, 2)
+texture = ExtResource("1_2t5c7")
+metadata/_edit_lock_ = true
+
 [node name="TextureRect2" type="TextureRect" parent="."]
 offset_left = 1713.0
 offset_right = 2855.0
@@ -47,15 +56,37 @@ scale = Vector2(1.5, 2)
 texture = ExtResource("1_2t5c7")
 metadata/_edit_lock_ = true
 
+[node name="Panel" type="Panel" parent="."]
+offset_left = -1627.0
+offset_top = 702.0
+offset_right = -1231.0
+offset_bottom = 805.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 414.0
+offset_bottom = 140.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_nyokt")
+text = "Use WASD to move Sir Ribbit
+Use arrow keys to move Sally
+Sally can shoot portals with left mouse click.
+ Collect energy for Sally to use the portals!"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = -146.0
-offset_top = 908.0
-offset_right = -73.0
-offset_bottom = 946.0
-text = "Button for the platform called \"Gate\" to move to make a platform for the frog to jump across here"
-metadata/_edit_use_anchors_ = true
+[node name="LevelCompleteUI" parent="CanvasLayer" instance=ExtResource("2_w5wj5")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 596.0
+offset_top = 62.0
+offset_right = 596.0
+offset_bottom = 62.0
+grow_horizontal = 1
+grow_vertical = 1
+next_scene = "res://level_2.tscn"
 
 [node name="EnergyUI" parent="CanvasLayer" instance=ExtResource("2_rwncp")]
 anchors_preset = 5
@@ -66,7 +97,7 @@ offset_right = 20.0
 grow_horizontal = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="OutOfBoundsWarning" type="Label" parent="CanvasLayer"]
+[node name="OutOfBoundsWarning" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("OOBwarning_label")]
 visible = false
 offset_right = 40.0
 offset_bottom = 23.0
@@ -75,36 +106,29 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_fonts/font = ExtResource("3_nyokt")
 text = "blank"
 script = ExtResource("4_0xnq8")
+OOBwarning_label = NodePath(".")
 
-[node name="player_1_jumper" parent="." instance=ExtResource("2_ox655")]
-position = Vector2(-1125, 618)
+[node name="RestartButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 65.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_nyokt")
+text = "Restart"
+script = ExtResource("6_1fblh")
+
+[node name="player_1_jumper" parent="." node_paths=PackedStringArray("other_player") instance=ExtResource("2_ox655")]
+position = Vector2(-1123, 654)
 scale = Vector2(0.25, 0.25)
+other_player = NodePath("../Player2")
 
-[node name="Player2" parent="." instance=ExtResource("3_pl61t")]
+[node name="Player2" parent="." node_paths=PackedStringArray("other_player") instance=ExtResource("3_pl61t")]
 light_mask = 33
-position = Vector2(-1107, 966)
+position = Vector2(-1099, 992)
 scale = Vector2(0.4, 0.4)
-
-[node name="Platform4" parent="." instance=ExtResource("1_itwvd")]
-position = Vector2(-128, 760)
-
-[node name="Gate" parent="." instance=ExtResource("1_itwvd")]
-position = Vector2(-416, 600)
-rotation = 1.5708
-scale = Vector2(0.5, 1)
-script = ExtResource("4_mu508")
-
-[node name="Gate2" parent="." instance=ExtResource("1_itwvd")]
-visible = false
-position = Vector2(664, 409)
-scale = Vector2(0.35, 0.35)
-script = ExtResource("5_xgtnm")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-85, 971)
-shape = SubResource("RectangleShape2D_ikdgq")
+other_player = NodePath("../player_1_jumper")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(1, 2)
@@ -112,7 +136,7 @@ stream = ExtResource("6_qvqx5")
 volume_db = -18.324
 autoplay = true
 max_distance = 30000.0
-parameters/looping = false
+parameters/looping = true
 
 [node name="PortalEnergyItem" parent="." instance=ExtResource("8_ii2cj")]
 position = Vector2(-1022, 820)
@@ -122,16 +146,32 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(-542, 816)
 scale = Vector2(0.5, 0.5)
 
+[node name="PortalEnergyItem3" parent="." instance=ExtResource("8_ii2cj")]
+position = Vector2(-186, 624)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem4" parent="." instance=ExtResource("8_ii2cj")]
+position = Vector2(18, 728)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem6" parent="." instance=ExtResource("8_ii2cj")]
+position = Vector2(639, 672)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem5" parent="." instance=ExtResource("8_ii2cj")]
+position = Vector2(479, 589)
+scale = Vector2(0.5, 0.5)
+
 [node name="GroundPlatform" parent="." instance=ExtResource("12_ycpxu")]
 position = Vector2(-920, 719)
 scale = Vector2(2, 0.3)
 
 [node name="GroundPlatform2" parent="." instance=ExtResource("12_ycpxu")]
-position = Vector2(-928, 1024)
+position = Vector2(-928, 1104)
 scale = Vector2(2, 0.3)
 
 [node name="GroundPlatform6" parent="." instance=ExtResource("12_ycpxu")]
-position = Vector2(-242, 1024)
+position = Vector2(-242, 1104)
 scale = Vector2(2, 0.3)
 
 [node name="GroundPlatform3" parent="." instance=ExtResource("12_ycpxu")]
@@ -140,6 +180,10 @@ scale = Vector2(2, 0.23)
 
 [node name="GroundPlatform5" parent="." instance=ExtResource("12_ycpxu")]
 position = Vector2(-242, 872)
+scale = Vector2(2, 0.23)
+
+[node name="GroundPlatform9" parent="." instance=ExtResource("12_ycpxu")]
+position = Vector2(442, 872)
 scale = Vector2(2, 0.23)
 
 [node name="StonePlatform" parent="." instance=ExtResource("13_ebwai")]
@@ -151,58 +195,171 @@ position = Vector2(-585, 975)
 scale = Vector2(0.29, 0.29)
 
 [node name="StonePlatform3" parent="." instance=ExtResource("13_ebwai")]
-position = Vector2(-585, 1063)
+position = Vector2(-585, 1062)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform11" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(-585, 1149)
 scale = Vector2(0.29, 0.29)
 
 [node name="StonePlatform4" parent="." instance=ExtResource("13_ebwai")]
-position = Vector2(-585, 1150)
-scale = Vector2(0.29, 0.29)
-
-[node name="StonePlatform9" parent="." instance=ExtResource("13_ebwai")]
 position = Vector2(-585, 1236)
 scale = Vector2(0.29, 0.29)
 
+[node name="StonePlatform9" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(-585, 1323)
+scale = Vector2(0.29, 0.29)
+
 [node name="StonePlatform5" parent="." instance=ExtResource("13_ebwai")]
-position = Vector2(102, 888)
+position = Vector2(101, 888)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform13" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(101, 801)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform14" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(101, 713)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform20" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(14, 801)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform16" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(-275, 698)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform17" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(-191, 698)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform23" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(-1355, 863)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform24" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(-1271, 863)
 scale = Vector2(0.29, 0.29)
 
 [node name="StonePlatform6" parent="." instance=ExtResource("13_ebwai")]
-position = Vector2(102, 975)
+position = Vector2(101, 975)
 scale = Vector2(0.29, 0.29)
 
 [node name="StonePlatform7" parent="." instance=ExtResource("13_ebwai")]
-position = Vector2(102, 1063)
+position = Vector2(101, 1062)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform12" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(101, 1149)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform15" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(786, 854)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform21" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(635, 744)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform22" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(477, 663)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform18" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(786, 941)
+scale = Vector2(0.29, 0.29)
+
+[node name="StonePlatform19" parent="." instance=ExtResource("13_ebwai")]
+position = Vector2(786, 1028)
 scale = Vector2(0.29, 0.29)
 
 [node name="StonePlatform8" parent="." instance=ExtResource("13_ebwai")]
-position = Vector2(102, 1150)
+position = Vector2(101, 1236)
 scale = Vector2(0.29, 0.29)
 
 [node name="StonePlatform10" parent="." instance=ExtResource("13_ebwai")]
-position = Vector2(102, 1238)
+position = Vector2(102, 1323)
 scale = Vector2(0.29, 0.29)
 
 [node name="Dirt" parent="." instance=ExtResource("14_ev61v")]
-position = Vector2(-1078, 1219)
+position = Vector2(-1078, 1299)
 
 [node name="Dirt2" parent="." instance=ExtResource("14_ev61v")]
-position = Vector2(-778, 1219)
+position = Vector2(-778, 1299)
 
 [node name="Dirt3" parent="." instance=ExtResource("14_ev61v")]
-position = Vector2(-391, 1219)
+position = Vector2(-392, 1299)
 
 [node name="Dirt4" parent="." instance=ExtResource("14_ev61v")]
-position = Vector2(-91, 1219)
+position = Vector2(-92, 1299)
 
-[node name="Area2D2" type="Area2D" parent="."]
-position = Vector2(929, 1130)
+[node name="GroundPlatform7" parent="." instance=ExtResource("12_ycpxu")]
+position = Vector2(445, 1104)
+scale = Vector2(2, 0.3)
+
+[node name="Dirt5" parent="." instance=ExtResource("14_ev61v")]
+position = Vector2(295, 1299)
+
+[node name="Dirt6" parent="." instance=ExtResource("14_ev61v")]
+position = Vector2(595, 1299)
+
+[node name="GroundPlatform8" parent="." instance=ExtResource("12_ycpxu")]
+position = Vector2(1044, 1104)
+scale = Vector2(2, 0.3)
+
+[node name="Dirt7" parent="." instance=ExtResource("14_ev61v")]
+position = Vector2(894, 1299)
+
+[node name="Dirt8" parent="." instance=ExtResource("14_ev61v")]
+position = Vector2(1194, 1299)
+
+[node name="Death_area" type="Area2D" parent="."]
+position = Vector2(929, 1210)
+collision_mask = 7
 script = ExtResource("15_yiuff")
 
-[node name="boundary" type="CollisionShape2D" parent="Area2D2"]
+[node name="boundary" type="CollisionShape2D" parent="Death_area"]
+position = Vector2(16, 136)
 shape = SubResource("RectangleShape2D_1ny8b")
 debug_color = Color(0.746247, 0.433979, 0.436057, 0.42)
 
-[connection signal="area_entered" from="Area2D" to="Gate" method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="Area2D" to="Gate2" method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Area2D2" to="player_1_jumper" method="_on_area_2d_2_body_entered"]
-[connection signal="body_entered" from="Area2D2" to="Player2" method="_on_area_2d_2_body_entered"]
+[node name="Sprite2D" type="Sprite2D" parent="Death_area"]
+position = Vector2(-2640, 280)
+scale = Vector2(1.61333, 1)
+texture = ExtResource("16_nlm6g")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Death_area"]
+position = Vector2(860, 280)
+scale = Vector2(5.48333, 1)
+texture = ExtResource("16_nlm6g")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
+position = Vector2(-874, 744)
+script = ExtResource("17_qtjna")
+player1 = NodePath("../player_1_jumper")
+player2 = NodePath("../Player2")
+
+[node name="GoalArea" parent="." instance=ExtResource("19_m2goa")]
+position = Vector2(1126, 921)
+
+[node name="BlueButton" parent="." instance=ExtResource("20_v5ewl")]
+position = Vector2(-5, 1005)
+scale = Vector2(0.7, 0.7)
+target_platforms = Array[NodePath]([NodePath("../StonePillar")])
+
+[node name="BlueButton2" parent="." instance=ExtResource("20_v5ewl")]
+position = Vector2(481, 1010)
+rotation = 1.5708
+scale = Vector2(0.7, 0.7)
+target_platforms = Array[NodePath]([NodePath("../StonePillar2")])
+
+[node name="StonePillar" parent="." instance=ExtResource("18_eg7dn")]
+position = Vector2(-378, 188)
+
+[node name="StonePillar2" parent="." instance=ExtResource("18_eg7dn")]
+position = Vector2(117, 9)
+
+[connection signal="pressed" from="CanvasLayer/RestartButton" to="CanvasLayer/RestartButton" method="_on_pressed"]
+[connection signal="body_entered" from="Death_area" to="Death_area" method="_on_body_entered"]
+[connection signal="level_complete" from="GoalArea" to="CanvasLayer/LevelCompleteUI" method="_on_goal_area_level_complete"]

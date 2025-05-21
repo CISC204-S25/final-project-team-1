@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxe6xjxw2yet6"]
+
+[ext_resource type="Script" path="res://blue_button.gd" id="1_4y3u0"]
+[ext_resource type="Texture2D" uid="uid://b0vybou5wo5ry" path="res://Sprites/Blue_button.PNG" id="1_r7b5s"]
+[ext_resource type="Texture2D" uid="uid://cwbqh671p44ep" path="res://Sprites/Blue_buttonPressed.PNG" id="2_n20a7"]
+[ext_resource type="AudioStream" uid="uid://m7t76gxpquj4" path="res://Assets/music and sound effects/button.mp3" id="4_nuulc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qd7qy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r7b5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_n20a7")
+}],
+"loop": false,
+"name": &"ButtonPressed",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_75jns"]
+radius = 48.0
+height = 152.0
+
+[node name="BlueButton" type="Area2D"]
+collision_mask = 7
+script = ExtResource("1_4y3u0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_qd7qy")
+animation = &"ButtonPressed"
+frame_progress = 0.745503
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(46, -1)
+shape = SubResource("CapsuleShape2D_75jns")
+
+[node name="ButtonClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_nuulc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

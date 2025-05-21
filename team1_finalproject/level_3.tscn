@@ -1,0 +1,427 @@
+[gd_scene load_steps=22 format=3 uid="uid://cqe7l4gsutgwc"]
+
+[ext_resource type="Texture2D" uid="uid://b6k54wo7ajqdi" path="res://Sprites/Bg_level_3.PNG" id="1_6bv3o"]
+[ext_resource type="PackedScene" uid="uid://bx387ksl8nb5b" path="res://energy_ui.tscn" id="2_ihrrj"]
+[ext_resource type="Script" path="res://PlayerCamera.gd" id="2_xjg77"]
+[ext_resource type="PackedScene" uid="uid://c8krai5m4jtmp" path="res://level_complete.tscn" id="3_3vb1r"]
+[ext_resource type="PackedScene" uid="uid://cgs5efdpmht1w" path="res://player_1_jumper.tscn" id="3_pjhg0"]
+[ext_resource type="Script" path="res://out_of_bounds_warning.gd" id="4_0a3ns"]
+[ext_resource type="FontFile" uid="uid://bvex18kkerm76" path="res://Assets/Howdy Frog.ttf" id="4_1w54h"]
+[ext_resource type="PackedScene" uid="uid://db4hrbsbwjte2" path="res://player_2_portal.tscn" id="4_8qcya"]
+[ext_resource type="Script" path="res://restart_button.gd" id="5_qsljr"]
+[ext_resource type="AudioStream" uid="uid://d1xw63kjrh1np" path="res://Assets/music and sound effects/35 Lost Woods_edited.mp3" id="10_67xca"]
+[ext_resource type="PackedScene" uid="uid://cwck0xemw7wnb" path="res://ground_platform.tscn" id="11_lrvnj"]
+[ext_resource type="Texture2D" uid="uid://dcm2xnc8uqut2" path="res://Sprites/Environment/Stump.PNG" id="12_eqlog"]
+[ext_resource type="PackedScene" uid="uid://dogjbsuwx8nod" path="res://death_area.tscn" id="12_y6u50"]
+[ext_resource type="PackedScene" uid="uid://rat4r85ag2yw" path="res://dirt.tscn" id="13_eukki"]
+[ext_resource type="PackedScene" uid="uid://cm22gkguevbb" path="res://goal_area.tscn" id="14_1dw3i"]
+[ext_resource type="PackedScene" uid="uid://cyu1iwl5w6s0n" path="res://moving_platform.tscn" id="15_ks08o"]
+[ext_resource type="PackedScene" uid="uid://1dv6k642ssyj" path="res://portal_energy_item.tscn" id="16_uo6v3"]
+[ext_resource type="PackedScene" uid="uid://b43mhyyvhjejb" path="res://stone_platform.tscn" id="17_07xin"]
+[ext_resource type="PackedScene" uid="uid://bxe6xjxw2yet6" path="res://blue_button.tscn" id="18_krwi0"]
+[ext_resource type="PackedScene" uid="uid://tmdxrymjkvdj" path="res://stone_pillar.tscn" id="19_6jk4k"]
+[ext_resource type="PackedScene" uid="uid://bcmawj6uwy3nv" path="res://pink_button.tscn" id="20_bmig2"]
+
+[node name="Level3" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_6bv3o")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+offset_left = 2284.0
+offset_right = 3426.0
+offset_bottom = 648.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_6bv3o")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = -2284.0
+offset_right = -1142.0
+offset_bottom = 648.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_6bv3o")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EnergyUI" parent="CanvasLayer" instance=ExtResource("2_ihrrj")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="LevelCompleteUI" parent="CanvasLayer" instance=ExtResource("3_3vb1r")]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+grow_vertical = 1
+next_scene = "res://EndTitle.tscn"
+
+[node name="OutOfBoundsWarning" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("OOBwarning_label")]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("4_1w54h")
+script = ExtResource("4_0a3ns")
+OOBwarning_label = NodePath(".")
+metadata/_edit_use_anchors_ = true
+
+[node name="RestartButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 80.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_1w54h")
+text = "Restart"
+script = ExtResource("5_qsljr")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
+position = Vector2(-1418, 407)
+script = ExtResource("2_xjg77")
+player1 = NodePath("../player_1_jumper")
+player2 = NodePath("../Player2")
+
+[node name="Stump" type="Sprite2D" parent="."]
+position = Vector2(83, 568)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_eqlog")
+
+[node name="Stump2" type="Sprite2D" parent="."]
+position = Vector2(759, 122)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_eqlog")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_67xca")
+autoplay = true
+max_distance = 30000.0
+parameters/looping = true
+
+[node name="death_area" parent="." instance=ExtResource("12_y6u50")]
+position = Vector2(-1798, 1350)
+
+[node name="death_area2" parent="." instance=ExtResource("12_y6u50")]
+position = Vector2(-1066, 1350)
+
+[node name="death_area3" parent="." instance=ExtResource("12_y6u50")]
+position = Vector2(-217, 1350)
+
+[node name="death_area4" parent="." instance=ExtResource("12_y6u50")]
+position = Vector2(460, 1350)
+scale = Vector2(1.2, 1)
+
+[node name="death_area5" parent="." instance=ExtResource("12_y6u50")]
+position = Vector2(1288, 1350)
+scale = Vector2(2, 1)
+
+[node name="death_area6" parent="." instance=ExtResource("12_y6u50")]
+position = Vector2(2337, 1350)
+
+[node name="death_area7" parent="." instance=ExtResource("12_y6u50")]
+position = Vector2(2932, 1350)
+
+[node name="death_area8" parent="." instance=ExtResource("12_y6u50")]
+position = Vector2(3535, 1350)
+
+[node name="GroundPlatform" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(-1366, 575)
+
+[node name="Dirt" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(-1366, 874)
+
+[node name="Dirt2" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(-1366, 1175)
+
+[node name="GroundPlatform2" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(-710, 575)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="Dirt3" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(-710, 874)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="Dirt4" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(-710, 1175)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="GroundPlatform3" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(70, 729)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="Dirt5" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(70, 1028)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="Dirt6" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(70, 1329)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="GroundPlatform4" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(849, 729)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="GroundPlatform7" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(800, 288)
+scale = Vector2(0.4, 1.02)
+collision_mask = 1
+
+[node name="GroundPlatform5" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(621, 214)
+scale = Vector2(0.8, 0.3)
+collision_mask = 1
+
+[node name="GroundPlatform6" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(621, 396)
+scale = Vector2(0.8, 0.3)
+collision_mask = 1
+
+[node name="Dirt7" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(849, 1028)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="Dirt8" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(849, 1329)
+scale = Vector2(0.6, 1)
+collision_mask = 1
+
+[node name="GroundPlatform8" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(1224, 782)
+scale = Vector2(1, 1.5)
+collision_mask = 1
+
+[node name="Dirt9" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(1224, 1257)
+scale = Vector2(1, 1.667)
+collision_mask = 1
+
+[node name="GroundPlatform9" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(1894, 782)
+scale = Vector2(1, 1.5)
+collision_mask = 1
+
+[node name="Dirt11" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(1894, 1256)
+scale = Vector2(1, 1.667)
+collision_mask = 1
+
+[node name="GroundPlatform10" parent="." instance=ExtResource("11_lrvnj")]
+position = Vector2(3081, 778)
+scale = Vector2(1, 1.5)
+collision_mask = 1
+
+[node name="Dirt12" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(3081, 1253)
+scale = Vector2(1, 1.667)
+collision_mask = 1
+
+[node name="Dirt10" parent="." instance=ExtResource("13_eukki")]
+position = Vector2(1224, 1409)
+scale = Vector2(1, 1.667)
+collision_mask = 1
+
+[node name="GoalArea" parent="." instance=ExtResource("14_1dw3i")]
+position = Vector2(3054, 472)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("15_ks08o")]
+position = Vector2(-1170, 504)
+scale = Vector2(0.5, 0.5)
+point_a = Vector2(-1170, 504)
+point_b = Vector2(-935, 504)
+
+[node name="MovingPlatform2" parent="." instance=ExtResource("15_ks08o")]
+position = Vector2(-395, 504)
+scale = Vector2(0.5, 0.5)
+point_a = Vector2(-395, 504)
+point_b = Vector2(-200, 504)
+
+[node name="MovingPlatform3" parent="." instance=ExtResource("15_ks08o")]
+position = Vector2(-214, 375)
+scale = Vector2(0.5, 0.5)
+point_a = Vector2(-214, 375)
+point_b = Vector2(-50, 375)
+
+[node name="MovingPlatform4" parent="." instance=ExtResource("15_ks08o")]
+position = Vector2(1492, 662)
+scale = Vector2(0.3, 0.3)
+point_a = Vector2(1492, 662)
+point_b = Vector2(1492, 900)
+
+[node name="MovingPlatform5" parent="." instance=ExtResource("15_ks08o")]
+position = Vector2(2120, 648)
+scale = Vector2(0.3, 0.3)
+point_a = Vector2(2120, 648)
+point_b = Vector2(2800, 648)
+speed = 90.0
+
+[node name="PortalEnergyItem" parent="." instance=ExtResource("16_uo6v3")]
+position = Vector2(-710, 444)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem3" parent="." instance=ExtResource("16_uo6v3")]
+position = Vector2(-169, 253)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem5" parent="." instance=ExtResource("16_uo6v3")]
+position = Vector2(425, 219)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem9" parent="." instance=ExtResource("16_uo6v3")]
+position = Vector2(2406, 369)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem8" parent="." instance=ExtResource("16_uo6v3")]
+position = Vector2(1507, 854)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem6" parent="." instance=ExtResource("16_uo6v3")]
+position = Vector2(309, 293)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem4" parent="." instance=ExtResource("16_uo6v3")]
+position = Vector2(-350, 396)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortalEnergyItem2" parent="." instance=ExtResource("16_uo6v3")]
+position = Vector2(-1003, 334)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(-1000, 809)
+scale = Vector2(0.7, 0.7)
+
+[node name="StonePlatform2" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(235, 703)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform3" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(384, 703)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform4" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(534, 703)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform13" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(578, 107)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform5" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(684, 703)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform14" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(2340, 544)
+scale = Vector2(0.15, 0.15)
+
+[node name="StonePlatform15" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(2406, 458)
+scale = Vector2(0.15, 0.15)
+
+[node name="StonePlatform6" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(234, 985)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform7" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(384, 985)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform8" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(534, 985)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform9" parent="." instance=ExtResource("17_07xin")]
+position = Vector2(684, 985)
+scale = Vector2(0.5, 0.5)
+
+[node name="StonePlatform10" parent="." instance=ExtResource("17_07xin")]
+visible = false
+position = Vector2(214, 529)
+scale = Vector2(0.2, 0.2)
+
+[node name="StonePlatform11" parent="." instance=ExtResource("17_07xin")]
+visible = false
+position = Vector2(311, 414)
+scale = Vector2(0.2, 0.2)
+
+[node name="StonePlatform12" parent="." instance=ExtResource("17_07xin")]
+visible = false
+position = Vector2(425, 334)
+scale = Vector2(0.5, 0.3)
+
+[node name="BlueButton" parent="." instance=ExtResource("18_krwi0")]
+position = Vector2(-1054, 659)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+target_platforms = Array[NodePath]([NodePath("../StonePillar")])
+
+[node name="BlueButton2" parent="." instance=ExtResource("18_krwi0")]
+position = Vector2(695, 319)
+scale = Vector2(0.5, 0.5)
+target_platforms = Array[NodePath]([NodePath("../StonePillar3")])
+
+[node name="BlueButton3" parent="." instance=ExtResource("18_krwi0")]
+position = Vector2(1917, 583)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+target_platforms = Array[NodePath]([NodePath("../StonePillar4")])
+
+[node name="StonePillar" parent="." instance=ExtResource("19_6jk4k")]
+position = Vector2(-559, -1)
+
+[node name="StonePillar2" parent="." instance=ExtResource("19_6jk4k")]
+position = Vector2(-559, 722)
+
+[node name="StonePillar3" parent="." instance=ExtResource("19_6jk4k")]
+position = Vector2(920, -34)
+
+[node name="StonePillar4" parent="." instance=ExtResource("19_6jk4k")]
+position = Vector2(1744, -34)
+
+[node name="PinkButton" parent="." instance=ExtResource("20_bmig2")]
+position = Vector2(715, 854)
+scale = Vector2(0.5, 0.5)
+target_platforms = Array[NodePath]([NodePath("../StonePlatform10"), NodePath("../StonePlatform11"), NodePath("../StonePlatform12")])
+
+[node name="player_1_jumper" parent="." node_paths=PackedStringArray("other_player") instance=ExtResource("3_pjhg0")]
+position = Vector2(-1480, 365)
+scale = Vector2(0.25, 0.25)
+max_player_distance = 1200
+other_player = NodePath("../Player2")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("other_player") instance=ExtResource("4_8qcya")]
+position = Vector2(-1420, 425)
+scale = Vector2(0.4, 0.4)
+max_player_distance = 1200
+other_player = NodePath("../player_1_jumper")
+max_portal_y = 200
+
+[connection signal="pressed" from="CanvasLayer/RestartButton" to="CanvasLayer/RestartButton" method="_on_pressed"]
+[connection signal="body_entered" from="death_area" to="death_area" method="_on_body_entered"]
+[connection signal="body_entered" from="death_area2" to="death_area2" method="_on_body_entered"]
+[connection signal="body_entered" from="death_area3" to="death_area3" method="_on_body_entered"]
+[connection signal="body_entered" from="death_area4" to="death_area4" method="_on_body_entered"]
+[connection signal="body_entered" from="death_area5" to="death_area5" method="_on_body_entered"]
+[connection signal="body_entered" from="death_area6" to="death_area6" method="_on_body_entered"]
+[connection signal="body_entered" from="death_area7" to="death_area7" method="_on_body_entered"]
+[connection signal="body_entered" from="death_area8" to="death_area8" method="_on_body_entered"]
+[connection signal="level_complete" from="GoalArea" to="CanvasLayer/LevelCompleteUI" method="_on_goal_area_level_complete"]
+[connection signal="body_entered" from="PinkButton" to="PinkButton" method="_on_body_entered"]

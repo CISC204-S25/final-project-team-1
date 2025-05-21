@@ -2,7 +2,7 @@ extends Node
 
 var max_energy := 100
 var current_energy := 0
-
+	
 func add_energy(amount: int):
 	current_energy = clamp(current_energy + amount, 0, max_energy)
 

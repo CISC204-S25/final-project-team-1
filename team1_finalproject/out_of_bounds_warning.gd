@@ -1,7 +1,7 @@
 extends Label
 
 
-@onready var OOBwarning_label = get_node("/root/Level_1/CanvasLayer/OutOfBoundsWarning")
+@export var OOBwarning_label = Node2D
 
 func show_warning(message: String, duration := 1.5):
 	OOBwarning_label.text = message

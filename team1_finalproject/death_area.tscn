@@ -1,16 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8t3xotu8lifa"]
+[gd_scene load_steps=4 format=3 uid="uid://dogjbsuwx8nod"]
 
-[ext_resource type="Texture2D" uid="uid://dtxm7ccigdnpb" path="res://Sprites/Environment/DeadlySwamp_.PNG" id="1_q3xla"]
+[ext_resource type="Script" path="res://death_area.gd" id="1_na4fy"]
+[ext_resource type="Texture2D" uid="uid://dtxm7ccigdnpb" path="res://Sprites/Environment/DeadlySwamp_.PNG" id="2_fagt7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vl25"]
-size = Vector2(304, 256)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06gjs"]
+size = Vector2(604, 514)
 
-[node name="DeathArea" type="Area2D"]
+[node name="death_area" type="Area2D"]
+collision_mask = 7
+script = ExtResource("1_na4fy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_q3xla")
+texture = ExtResource("2_fagt7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 24)
-shape = SubResource("RectangleShape2D_8vl25")
+position = Vector2(3, 46)
+shape = SubResource("RectangleShape2D_06gjs")
+debug_color = Color(0.780033, 0.437206, 5.77569e-07, 0.42)

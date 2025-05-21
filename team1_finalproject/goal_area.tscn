@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm22gkguevbb"]
+
+[ext_resource type="Texture2D" uid="uid://433xqcnrthl7" path="res://Sprites/FlowerGoal.PNG" id="1_8ngjn"]
+[ext_resource type="Script" path="res://goal_area.gd" id="1_twypd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33sdw"]
+size = Vector2(116, 115)
+
+[node name="GoalArea" type="Area2D"]
+collision_mask = 7
+script = ExtResource("1_twypd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(120, 94.5)
+shape = SubResource("RectangleShape2D_33sdw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(122, 62)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_8ngjn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
